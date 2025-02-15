@@ -12,6 +12,12 @@
       type="text/css"
     />
     <link rel="stylesheet" href="public/index.css" />
+    <script>
+      const baseUrl = window.location.origin;
+      const currentPath = window.location.pathname;
+      const directoryPath =
+        baseUrl + currentPath.substring(0, currentPath.lastIndexOf("/"));
+    </script>
   </head>
   <body>
     <div class="container">
@@ -25,7 +31,7 @@
         />
         <button onclick="checkMe()" type="submit">بررسی</button>
         <button
-          onclick="void(window.location.href=('/decrypt.html'))"
+          onclick="void(window.location.href=(directoryPath+'/decrypt.html'))"
           type="button"
         >
           رمزگشایی
@@ -45,11 +51,6 @@
         const fileName = CryptoJS.MD5(
           document.getElementById("nickname").value.trim()
         ).toString();
-
-        const baseUrl = window.location.origin;
-        const currentPath = window.location.pathname;
-        const directoryPath =
-          baseUrl + currentPath.substring(0, currentPath.lastIndexOf("/"));
 
         fetch(`${directoryPath}/database/${fileName}.txt`, {
           method: "HEAD",
