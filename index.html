@@ -46,17 +46,22 @@
           document.getElementById("nickname").value.trim()
         ).toString();
 
-        fetch(`/database/${fileName}.txt`, { method: "HEAD" }).then(
-          (response) => {
-            if (response.ok) {
-              res.innerText = "بله درباره شما صحبت شده";
-              res.style.color = "#218838";
-            } else {
-              res.innerText = "خیر درباره شما صحبت نشده";
-              res.style.color = "red";
-            }
+        const baseUrl = window.location.origin;
+        const currentPath = window.location.pathname;
+        const directoryPath =
+          baseUrl + currentPath.substring(0, currentPath.lastIndexOf("/"));
+
+        fetch(`${directoryPath}/database/${fileName}.txt`, {
+          method: "HEAD",
+        }).then((response) => {
+          if (response.ok) {
+            res.innerText = "بله درباره شما اطلاعاتی موجود است";
+            res.style.color = "#218838";
+          } else {
+            res.innerText = "خیر درباره شما اطلاعاتی موجود نیست";
+            res.style.color = "red";
           }
-        );
+        });
       }
     </script>
   </body>

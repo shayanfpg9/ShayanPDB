@@ -3,7 +3,11 @@ function decryptFile() {
         document.getElementById("fileName").value.trim()
     ).toString();
 
-    fetch(`database/${fileName}.txt`)
+    const baseUrl = window.location.origin;
+    const currentPath = window.location.pathname;
+    const directoryPath = baseUrl + currentPath.substring(0, currentPath.lastIndexOf('/')) + "/";
+
+    fetch(directoryPath + `database/${fileName}.txt`)
         .then((response) => response.text())
         .then(async (encryptedData) => {
             console.log(window.privateKey, encryptedData);
@@ -15,7 +19,7 @@ function decryptFile() {
 
 
             if (decrypted) {
-                document.getElementById("output").textContent = decrypted.replaceAll(",",",\n\t").replaceAll("{","{\n\t").replaceAll("}","\n}");
+                document.getElementById("output").textContent = decrypted.replaceAll(",", ",\n\t").replaceAll("{", "{\n\t").replaceAll("}", "\n}");
             } else {
                 document.getElementById("output").textContent =
                     "رمزگشایی ناموفق بود!";
