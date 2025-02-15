@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>رمزگشایی اطلاعات</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <!-- اضافه کردن فونت Vazir از CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="public/index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>آیا درباره من چیزی نوشته شده است؟</h2>
+
+      <form>
+        <input
+          type="text"
+          id="nickname"
+          placeholder="لقب (نام یا نام و نام خانوادگی) خود را وارد کنید"
+        />
+        <button onclick="checkMe()" type="submit">بررسی</button>
+        <button
+          onclick="void(window.location.href=('/decrypt.html'))"
+          type="button"
+        >
+          رمزگشایی
+        </button>
+
+        <span id="result"></span>
+      </form>
+    </div>
+
+    <script>
+      document.querySelectorAll("form").forEach((el) => {
+        el.onsubmit = (e) => e.preventDefault();
+      });
+
+      function checkMe() {
+        const res = document.getElementById("result");
+        const fileName = CryptoJS.MD5(
+          document.getElementById("nickname").value.trim()
+        ).toString();
+
+        fetch(`/database/${fileName}.txt`, { method: "HEAD" }).then(
+          (response) => {
+            if (response.ok) {
+              res.innerText = "بله درباره شما صحبت شده";
+              res.style.color = "#218838";
+            } else {
+              res.innerText = "خیر درباره شما صحبت نشده";
+              res.style.color = "red";
+            }
+          }
+        );
+      }
+    </script>
+  </body>
+</html>

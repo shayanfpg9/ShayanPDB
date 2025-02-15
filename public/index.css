@@ -1,0 +1,85 @@
+/* تنظیم فونت Vazir برای کل صفحه */
+body {
+  font-family: Vazir, Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden; /* جلوگیری از overflow کلی صفحه */
+  direction: rtl;
+}
+
+/* استایل کانتینر فرم */
+.container {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  max-height: 90vh;
+  margin: 1rem;
+  overflow-y: auto; /* اضافه کردن اسکرول در صورت نیاز */
+}
+
+/* استایل عنوان فرم */
+.container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* استایل فیلدهای ورودی */
+.container input[type="text"],
+.container textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Vazir, Arial, sans-serif;
+  font-size: 18px;
+  box-sizing: border-box; /* جلوگیری از overflow */
+}
+
+/* استایل دکمه‌ها */
+.container button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0.5rem 0;
+  font-family: Vazir, Arial, sans-serif;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.container button:hover {
+  background-color: #218838;
+}
+
+/* استایل دکمه اضافه کردن ویژگی جدید */
+.container button[type="button"] {
+  background-color: #007bff;
+}
+
+.container button[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+.hide {
+  display: none;
+}
+
+/* استایل فیلدهای اضافی */
+#additionalFields input {
+  margin-bottom: 0.5rem;
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fa">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>رمزگشایی اطلاعات</title>
+    <script src="https://cdn.jsdelivr.net/npm/node-forge@0.10.0/dist/forge.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <!-- اضافه کردن فونت Vazir از CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="public/index.css" />
+  </head>
+  <body>
+    <form id="privkey" class="container hide">
+      <h2>کلید خصوصی</h2>
+      <textarea
+        id="privkey_inp"
+        placeholder="کلید خصوصی خود را وارد کنید"
+      ></textarea>
+      <button onclick="GetPrivateKey()" type="submit">ارسال کلید</button>
+    </form>
+
+    <form id="form" class="container hide">
+      <h2>رمزگشایی اطلاعات</h2>
+      <input type="text" id="fileName" placeholder="نام شخص به فارسی" />
+      <button onclick="decryptFile()" type="submit">رمزگشایی</button>
+      <button type="button" onclick="deleteKey()">حذف کلید خصوصی</button>
+      <pre id="output"></pre>
+    </form>
+
+    <script src="scripts/mainScripts.js"></script>
+    <script src="scripts/decrypt.js"></script>
+  </body>
+</html>
