@@ -51,8 +51,11 @@ async function decrypt() {
     const hash = CryptoJS.MD5(username).toString();
     const keyInput = document.getElementById("privateKeyFile");
     const output = document.getElementById("output");
-    const directoryPath =
-        baseUrl + currentPath.substring(0, currentPath.lastIndexOf("/"));
+    const baseUrl = window.location.origin;
+    const currentPath = window.location.pathname;
+    const directoryPath = baseUrl + currentPath.substring(0, currentPath.lastIndexOf('/')) + "/";
+
+
     const url = `${directoryPath}/data/${hash}.json`;
 
     if (!username || !keyInput.files[0]) {

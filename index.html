@@ -17,8 +17,12 @@
       async function check() {
         const username = document.getElementById("username").value;
         const hash = CryptoJS.MD5(username.trim()).toString();
+        const baseUrl = window.location.origin;
+        const currentPath = window.location.pathname;
         const directoryPath =
-          baseUrl + currentPath.substring(0, currentPath.lastIndexOf("/"));
+          baseUrl +
+          currentPath.substring(0, currentPath.lastIndexOf("/")) +
+          "/";
         const url = `${directoryPath}/data/${hash}.json`;
 
         fetch(url)
