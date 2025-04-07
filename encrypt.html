@@ -1,98 +1,18 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>فرم اطلاعات هویتی</title>
-    <!-- اضافه کردن فونت Vazir از CDN -->
-    <link
-      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link rel="stylesheet" href="/index.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h2>فرم اطلاعات هویتی</h2>
-      <form id="identityForm">
-        <input type="text" id="name" name="name" placeholder="نام" required />
-        <input
-          type="text"
-          id="nickname"
-          name="nickname"
-          placeholder="لقب"
-          required
-        />
-        <input type="text" id="id" name="id" placeholder="آیدی" required />
-        <input
-          type="text"
-          id="lastname"
-          name="lastname"
-          placeholder="نام خانوادگی"
-        />
-        <input
-          type="text"
-          id="phoneNumber"
-          name="phoneNumber"
-          placeholder="شماره تلفن"
-        />
-        <div id="additionalFields"></div>
-        <button type="button" onclick="addField()">
-          اضافه کردن ویژگی جدید
-        </button>
-        <button type="submit">ثبت اطلاعات</button>
-      </form>
-    </div>
-
-    <script>
-      // تابع برای اضافه کردن فیلد جدید
-      function addField() {
-        const name = prompt("نام فیلد را به انگلیسی وارد کنید");
-        const placeholder = prompt("نام فیلد را به فارسی وارد کنید");
-        const input = prompt("می خواهید اینپوت باشد؟", "1");
-
-        if (name && placeholder) {
-          const additionalFields = document.getElementById("additionalFields");
-          const type = parseInt(input) == 1 ? "input" : "textarea";
-          const newField = document.createElement(type);
-          newField.type = "text";
-          newField.placeholder = placeholder;
-          newField.name = name;
-          additionalFields.appendChild(newField);
-        }
-      }
-
-      document.querySelectorAll("form").forEach((el) => {
-        el.onsubmit = (e) => e.preventDefault();
-      });
-
-      document
-        .getElementById("identityForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-
-          // Convert form data to an object
-          const formData = this.querySelectorAll("input, textarea");
-          let data = {};
-
-          formData.forEach((v, i) => {
-            console.log(v);
-
-            data[v.name] = v.value;
-          });
-
-          fetch("/submit", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-          })
-            .then(() => alert("✅ اطلاعات با موفقیت ثبت شد!"))
-            .catch((e) => {
-              alert("❌ مشکلی پیش آمد، لطفاً دوباره تلاش کنید.");
-              console.error("❌ Error:", error);
-            });
-        });
-    </script>
-  </body>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <title>رمزنگاری</title>
+</head>
+<body>
+  <h2>فرم رمزنگاری اطلاعات</h2>
+  <form action="/submit" method="POST">
+    <input type="text" name="username" placeholder="نام کاربری" required />
+    <br><br>
+    <textarea name="text" id="">متن دلخواه شما</textarea>
+    <!-- <input type="file" name="file1" /> -->
+    <br><br>
+    <button type="submit">ارسال</button>
+  </form>
+</body>
 </html>

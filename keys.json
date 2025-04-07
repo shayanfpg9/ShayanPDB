@@ -1,0 +1,5 @@
+{
+    "publicKeyPath": "./public.pem",
+    "privateKeyPath": "./private.pem",
+    "outputFolder": "./data"
+}

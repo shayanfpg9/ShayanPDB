@@ -2,67 +2,36 @@
 <html lang="fa">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>رمزگشایی اطلاعات</title>
+    <title>بررسی داده‌ها</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <!-- اضافه کردن فونت Vazir از CDN -->
-    <link
-      href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link rel="stylesheet" href="public/index.css" />
-    <script>
-      const baseUrl = window.location.origin;
-      const currentPath = window.location.pathname;
-      const directoryPath =
-        baseUrl + currentPath.substring(0, currentPath.lastIndexOf("/"));
-    </script>
+    <link rel="stylesheet" href="./public/index.css">
   </head>
   <body>
-    <div class="container">
-      <h2>آیا درباره من چیزی نوشته شده است؟</h2>
-
-      <form>
-        <input
-          type="text"
-          id="nickname"
-          placeholder="لقب (نام یا نام و نام خانوادگی) خود را وارد کنید"
-        />
-        <button onclick="checkMe()" type="submit">بررسی</button>
-        <button
-          onclick="void(window.location.href=(directoryPath+'/decrypt.html'))"
-          type="button"
-        >
-          رمزگشایی
-        </button>
-
-        <span id="result"></span>
-      </form>
-    </div>
+    <h2>بررسی داده رمزنگاری شده</h2>
+    <input type="text" id="username" placeholder="نام کاربری" />
+    <button onclick="check()">بررسی</button>
+    <p id="result"></p>
+    <a href="./decrypt.html">رمزگشایی</a>
 
     <script>
-      document.querySelectorAll("form").forEach((el) => {
-        el.onsubmit = (e) => e.preventDefault();
-      });
+      async function check() {
+        const username = document.getElementById("username").value;
+        const hash = CryptoJS.MD5(username.trim()).toString();
+        const url = `/data/${hash}.json`;
 
-      function checkMe() {
-        const res = document.getElementById("result");
-        const fileName = CryptoJS.MD5(
-          document.getElementById("nickname").value.trim()
-        ).toString();
-
-        fetch(`${directoryPath}/database/${fileName}.txt`, {
-          method: "HEAD",
-        }).then((response) => {
-          if (response.ok) {
-            res.innerText = "بله درباره شما اطلاعاتی موجود است";
-            res.style.color = "#218838";
-          } else {
-            res.innerText = "خیر درباره شما اطلاعاتی موجود نیست";
-            res.style.color = "red";
-          }
-        });
+        fetch(url)
+          .then((res) => {
+            if (res.ok) {
+              document.getElementById("result").innerText = "✅ داده موجود است";
+            } else {
+              document.getElementById("result").innerText =
+                "❌ داده‌ای یافت نشد";
+            }
+          })
+          .catch(() => {
+            document.getElementById("result").innerText =
+              "❌ خطا در بررسی فایل";
+          });
       }
     </script>
   </body>

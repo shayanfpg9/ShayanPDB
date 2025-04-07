@@ -1,93 +1,154 @@
-/* تنظیم فونت Vazir برای کل صفحه */
+@import url("https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap");
+
+/* تنظیمات پایه صفحه */
 body {
-  font-family: Vazir, Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #f2f7fe;
+  color: #333;
   margin: 0;
   padding: 0;
+  text-align: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  overflow: hidden; /* جلوگیری از overflow کلی صفحه */
+  height: 100vh;
   direction: rtl;
 }
 
-/* استایل کانتینر فرم */
-.container {
-  background-color: #fff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
-  max-height: 90vh;
-  margin: 1rem;
-  overflow-y: auto; /* اضافه کردن اسکرول در صورت نیاز */
+* {
+  font-family: Vazirmatn, "Arial", sans-serif;
+  font-weight: bold;
 }
 
-/* استایل عنوان فرم */
-.container h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-  color: #333;
+h2 {
+  font-size: 32px;
+  color: #4a90e2;
+  margin-top: 50px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* استایل فیلدهای ورودی */
-.container input[type="text"],
-.container textarea {
-  width: 100%;
-  max-width: 100%;
-  padding: 0.75rem;
-  margin: 0.5rem 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-family: Vazir, Arial, sans-serif;
+/* ورودی نام کاربری */
+input[type="text"],
+input[type="file"] {
+  padding: 15px;
   font-size: 18px;
-  box-sizing: border-box; /* جلوگیری از overflow */
+  border: 2px solid #ddd;
+  border-radius: 30px;
+  width: 80%;
+  max-width: 400px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-/* استایل دکمه‌ها */
-.container button {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #28a745;
+input[type="text"]:focus,
+input[type="file"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
+}
+
+/* دکمه */
+button {
+  padding: 12px 30px;
+  font-size: 18px;
+  background: linear-gradient(135deg, #2563eb, #4f8af1);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 50px;
   cursor: pointer;
-  margin: 0.5rem 0;
-  font-family: Vazir, Arial, sans-serif;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  background: linear-gradient(135deg, #1e40af, #4f8af1);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* نتیجه */
+#result {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 30px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f1f9fe;
+  color: #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#result.success {
+  background: #d4f7d2;
+  color: #2f7b3b;
+}
+
+#result.error {
+  background: #f7d2d2;
+  color: #e53e3e;
+}
+
+#output {
+  direction: ltr !important;
+  text-align: left;
+  font-family: monospace;
+  font-size: large;
+}
+
+/* لینک */
+a {
+  display: inline-block;
+  margin-top: 30px;
   font-size: 18px;
-  transition: background-color 0.3s ease;
+  text-decoration: none;
+  color: #2563eb;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
-textarea {
-  font-size: 14 px;
+a:hover {
+  color: #1e40af;
+  transform: scale(1.1);
 }
 
-pre {
-  direction: ltr;
+/* انیمیشن‌ها */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
-.container button:hover {
-  background-color: #218838;
+/* اضافه کردن انیمیشن به متن‌ها */
+h2,
+input[type="text"],
+input[type="file"],
+button,
+a {
+  animation: fadeIn 1s ease-in-out;
 }
 
-/* استایل دکمه اضافه کردن ویژگی جدید */
-.container button[type="button"] {
-  background-color: #007bff;
-}
+/* برای دستگاه‌های کوچک‌تر */
+@media (max-width: 600px) {
+  h2 {
+    font-size: 24px;
+  }
 
-.container button[type="button"]:hover {
-  background-color: #0056b3;
-}
+  input[type="text"],
+  input[type="file  "] {
+    width: 90%;
+  }
 
-.hide {
-  display: none;
-}
-
-/* استایل فیلدهای اضافی */
-#additionalFields input {
-  margin-bottom: 0.5rem;
+  button {
+    width: 90%;
+  }
 }
