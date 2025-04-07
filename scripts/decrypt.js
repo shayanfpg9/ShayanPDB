@@ -51,6 +51,9 @@ async function decrypt() {
     const hash = CryptoJS.MD5(username).toString();
     const keyInput = document.getElementById("privateKeyFile");
     const output = document.getElementById("output");
+    const directoryPath =
+        baseUrl + currentPath.substring(0, currentPath.lastIndexOf("/"));
+    const url = `${directoryPath}/data/${hash}.json`;
 
     if (!username || !keyInput.files[0]) {
         output.innerText = "❌ لطفاً نام کاربری و کلید خصوصی را وارد کنید";
@@ -64,7 +67,7 @@ async function decrypt() {
         const privateKey = forge.pki.privateKeyFromPem(privateKeyPem);
 
         // دریافت فایل رمزنگاری‌شده
-        const res = await fetch(`./data/${hash}.json`);
+        const res = await fetch(url);
         if (!res.ok) {
             output.innerText = "❌ فایل مربوط به این کاربر پیدا نشد";
             return;
